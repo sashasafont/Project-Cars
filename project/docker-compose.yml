@@ -6,7 +6,7 @@ services:
     environment:
       POSTGRES_USER: postgres
       POSTGRES_PASSWORD: postgres 
-      POSTGRES_DB: curso_ifcd0112
+      POSTGRES_DB: ventacoches
       POSTGRES_INITDB_ARGS: "--encoding=UTF-8 --locale=en_US.utf8"
     ports:
       - "5432:5432"
