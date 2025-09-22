@@ -95,3 +95,29 @@ FROM
 	ventacoches.coches_raw
 WHERE 
 	puertas IS NOT NULL;
+
+
+--NO ACABADO:
+
+DROP TABLE IF EXISTS ventacoches.coches;
+CREATE TABLE ventacoches.coches(
+	id SERIAL PRIMARY KEY,
+	
+	fabricante TEXT,
+	modelo TEXT,
+	version TEXT,
+	precio INT,
+	precio_financiado INT,
+	fuel TEXT,
+	year INT,
+	kilometraje INT,
+	cv TEXT,
+	puertas INT,
+	tipo TEXT,
+	color TEXT,
+	fotos TEXT,
+	profesional BOOLEAN,
+	vendedor TEXT,
+	provincia TEXT,
+	fecha_publicacion DATE,
+)
