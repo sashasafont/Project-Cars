@@ -97,27 +97,28 @@ WHERE
 	puertas IS NOT NULL;
 
 
---NO ACABADO:
-
 DROP TABLE IF EXISTS ventacoches.coches;
 CREATE TABLE ventacoches.coches(
 	id SERIAL PRIMARY KEY,
 	
+	fecha DATE,
+	cliente TEXT,
+	email TEXT,
 	fabricante TEXT,
 	modelo TEXT,
 	version TEXT,
 	precio INT,
-	precio_financiado INT,
-	fuel TEXT,
-	year INT,
-	kilometraje INT,
-	cv TEXT,
-	puertas INT,
-	tipo TEXT,
-	color TEXT,
-	fotos TEXT,
-	profesional BOOLEAN,
-	vendedor TEXT,
-	provincia TEXT,
-	fecha_publicacion DATE,
-)
+	cantidad INT
+);
+
+INSERT INTO ventacoches.coches (fecha, cliente, email, fabricante, modelo, version, precio, cantidad)
+SELECT
+	CAST(fecha AS DATE),
+	cliente,
+	email,
+	fabricante,
+	modelo,
+	version,
+	CAST(precio AS INT),
+	CAST(cantidad AS INT)
+FROM ventacoches.staging_copy;
