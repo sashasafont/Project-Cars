@@ -35,19 +35,24 @@ SELECT COUNT(DISTINCT fuel)
 FROM ventacoches.coches_raw;
 --seleciona fuel -> foreing
 SELECT DISTINCT fuel
-FROM ventacoches.coches_raw;
- 
---cuenta puertas (4) ->foreing
-SELECT COUNT(DISTINCT puertas)
-FROM ventacoches.coches_raw;
---seleciona puertas
-SELECT DISTINCT puertas
-FROM ventacoches.coches_raw;
+FROM ventacoches.coches_raw
+WHERE fuel NOT IN (
+ SELECT fuel FROM ventacoches.dim fuel);
 
---cuenta tipo (2)
-SELECT COUNT(DISTINCT tipo)
-FROM ventacoches.coches_raw;
---seleciona tipo
+
+SELECT DISTINCT puertas
+FROM ventacoches.coches_raw
+WHERE puertas NOT IN (
+  SELECT puertas_numero FROM ventacoches.dim_puertas
+);
+
+
+SELECT DISTINCT tipo
+FROM ventacoches.coches_raw
+WHERE LOWER(TRIM(tipo)) NOT IN (
+  SELECT tipo_nombre FROM ventacoches.dim_tipo
+);
+
 SELECT DISTINCT tipo
 FROM ventacoches.coches_raw;
 
@@ -119,11 +124,12 @@ WHERE
 
 INSERT INTO ventacoches.dim_puertas (puertas_numero)
 SELECT DISTINCT 
-	puertas 
+	CAST(puertas AS INT ) 
 FROM 
 	ventacoches.coches_raw
 WHERE 
 	puertas IS NOT NULL;
+	
 
 INSERT INTO ventacoches.dim_tipo (tipo_nombre)
 SELECT DISTINCT
@@ -138,7 +144,6 @@ CREATE TABLE ventacoches.coches(
 	id SERIAL PRIMARY KEY,
 	fecha DATE,
 	cliente TEXT,
-	email TEXT,
 
 	fabricante_id INT REFERENCES ventacoches.dim_fabricantes(fabricante_id),
 	modelo_id INT REFERENCES ventacoches.dim_modelos(modelo_id),
@@ -155,7 +160,7 @@ CREATE TABLE ventacoches.coches(
 );
 
 INSERT INTO ventacoches.coches (
-	fecha, cliente, email, 
+	fecha, cliente, 
 	fabricante_id, modelo_id, version,
 	fuel_id, puertas_id, tipo_id, provincia_id,
 	precio, precio_financiado, cantidad
@@ -163,7 +168,6 @@ INSERT INTO ventacoches.coches (
 SELECT
 	CAST(s.fecha_publicacion AS DATE),
 	NULL AS cliente,
-	NULL AS email,
 	f.fabricante_id,
 	m.modelo_id,
 	s.version,
@@ -175,9 +179,15 @@ SELECT
 	CAST(s.precio_financiado AS INT),
 	1 AS cantidad
 FROM ventacoches.coches_raw s
-LEFT JOIN ventacoches.dim_fabricantes f ON lower(s.fabricante) = f.fabricante
-LEFT JOIN ventacoches.dim_modelos m ON lower(s.modelo) = m.modelo
-LEFT JOIN ventacoches.dim_fuel fu ON lower(s.fuel) = fu.fuel
-LEFT JOIN ventacoches.dim_puertas p ON s.puertas = p.puertas_numero
-LEFT JOIN ventacoches.dim_tipo t ON lower(s.tipo) = t.tipo_nombre
-LEFT JOIN ventacoches.dim_provincias pr ON lower(s.provincia) = pr.provincia;
+LEFT JOIN ventacoches.dim_fabricantes f ON 
+    NULLIF(regexp_replace(lower(coalesce(s.fabricante,'')), '\s+',' ','g'),'') = f.fabricante
+LEFT JOIN ventacoches.dim_modelos m ON 
+    NULLIF(regexp_replace(lower(coalesce(s.modelo,'')), '\s+',' ','g'),'') = m.modelo
+LEFT JOIN ventacoches.dim_fuel fu ON 
+    NULLIF(regexp_replace(lower(coalesce(s.fuel,'')), '\s+',' ','g'),'') = fu.fuel
+LEFT JOIN ventacoches.dim_puertas p ON 
+    CAST(s.puertas AS INT) = p.puertas_numero
+LEFT JOIN ventacoches.dim_tipo t ON 
+    NULLIF(regexp_replace(lower(coalesce(s.tipo,'')), '\s+',' ','g'),'') = t.tipo_nombre
+LEFT JOIN ventacoches.dim_provincias pr ON 
+    NULLIF(regexp_replace(lower(coalesce(s.provincia,'')), '\s+',' ','g'),'') = pr.provincia;
