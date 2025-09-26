@@ -1,3 +1,10 @@
+DROP TABLE IF EXISTS ventacoches.coches;
+DROP TABLE IF EXISTS ventacoches.dim_provincias;
+DROP TABLE IF EXISTS ventacoches.dim_fabricantes;
+DROP TABLE IF EXISTS ventacoches.dim_modelos;
+DROP TABLE IF EXISTS ventacoches.dim_fuel;
+DROP TABLE IF EXISTS ventacoches.dim_puertas;
+DROP TABLE IF EXISTS ventacoches.dim_tipo;
 --cuenta todos los coches
 SELECT COUNT(*) FROM ventacoches.coches_raw;
 --muestra los 5 primeros

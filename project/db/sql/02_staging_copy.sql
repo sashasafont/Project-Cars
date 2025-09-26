@@ -10,7 +10,7 @@ CREATE TABLE IF NOT EXISTS ventacoches.coches_raw(
 	year INT,
 	kilometraje INT,
 	power TEXT,
-	doors INT,
+	puertas INT,
 	tipo TEXT,
 	color TEXT,
 	fotos TEXT,
