@@ -1,3 +1,4 @@
+DROP TABLE IF EXISTS ventacoches.raw;
 CREATE TABLE IF NOT EXISTS ventacoches.coches_raw(
 	url TEXT,
 	marca TEXT,
