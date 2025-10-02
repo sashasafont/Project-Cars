@@ -6,6 +6,7 @@ import 'dotenv/config';
 
 // Import routes
 import routes from './src/routes/routes.js';
+import { pool } from './src/db/db.js';
 
 console.log('🚀 Starting server...');
 const app = express();
