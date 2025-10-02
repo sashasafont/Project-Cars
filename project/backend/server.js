@@ -37,7 +37,7 @@ app.use((err, req, res, next) => {
 });
 
 // 404 handler
-app.use('*', (req, res) => {
+app.use((req, res) => {
   res.status(404).json({ error: 'Route not found' });
 });
 
@@ -47,16 +47,3 @@ app.listen(PORT, () => {
   console.log(`🏥 Health check: http://localhost:${PORT}`);
 });
 
-console.log('🚀 Server starting...');
-
-// Import routes
-console.log('📁 Importing routes...');
-// import routes from './src/routes/routes.js';
-console.log('✅ Routes imported successfully');
-
-// ...
-
-// Routes
-console.log('🔗 Setting up routes...');
-app.use('/api', routes);
-console.log('✅ Routes setup complete');
