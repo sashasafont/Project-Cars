@@ -16,19 +16,22 @@ Desarrollado en **Windows** usando **Docker Desktop**, **Node.js** y **React**.
 ## ⚙️ Instalación
 
 1. Clona el repositorio:
-```bash
+```
 git clone <URL-del-repo>
 cd Project-Cars/project
+```
 
 2. Instala dependencias para desarrollo local:
  # /backend
-\`\`\`bash
+```
 cd backend
 npm install
-\`\`\`
- # /frontend
+```
+ # /frontend 
+ ```
 cd ../frontend
 npm install
+```
 ---
 
 ## Cómo ejecutar:
@@ -39,26 +42,26 @@ npm install
 
 ### **Terminal 1 - Base de Datos (Docker)**
 
-\`\`\`bash
+```
 cd "ruta/al/proyecto/project"
 docker-compose up -d
-\`\`\`
+```
 
 ### **Terminal 2 - Backend**
 
-\`\`\`bash
+```bash
 cd "ruta/al/proyecto/project/backend"
 npm install
 node server.js
-\`\`\`
+```
 
 
 ### **Terminal 3 - Frontend**
 
-\`\`\`bash
+```bash
 cd "ruta/al/proyecto/project/frontend"
 npm run dev
-\`\`\`
+```
 ---
 
 ### **Configurar Base de Datos (pgAdmin):**
@@ -97,7 +100,7 @@ npm run dev
 
 ## 🧱 Estructura del proyecto
 
-\`\`\`
+```
 project/
 ├── backend/       # API / servidor Node.js
 ├── frontend/      # Aplicación web (React)
@@ -107,7 +110,7 @@ project/
 ├── docker-compose.yml
 ├── package.json
 └── README.md
-\`\`\`
+```
 
 ---
 
