@@ -22,12 +22,12 @@ cd Project-Cars/project
 ```
 
 2. Instala dependencias para desarrollo local:
- # /backend
+### /backend
 ```
 cd backend
 npm install
 ```
- # /frontend 
+ ### /frontend 
  ```
 cd ../frontend
 npm install
@@ -38,16 +38,25 @@ npm install
 
 1. Abre Docker Desktop 
 
-2. Abre tres consolas
+2. Abre tres consolas. En la primera:
 
-### **Terminal 1 - Base de Datos (Docker)**
+  #### **Terminal 1 - Base de Datos (Docker)**
 
 ```
 cd "ruta/al/proyecto/project"
 docker-compose up -d
 ```
+3. Configura Bases de Datos (pgAdmin):
+     1. **pgAdmin:** http://localhost:8080
+   - Email: ``admin@example.com`` / Password: ``admin``
+     2. **Crear servidor PostgreSQL:**
+   - Host: ``db`` / Port: ``5432`` / Database: ``ventacoches``
+   - Username: ``coches123`` / Password: ``coches123``
+     3. **Ejecutar SQLs en orden:** 01→02→03→04→05 (carpeta ``db/sql/``)
+        
+4. Vuelve a las terminales:
 
-### **Terminal 2 - Backend**
+#### **Terminal 2 - Backend**
 
 ```bash
 cd "ruta/al/proyecto/project/backend"
@@ -55,22 +64,17 @@ npm install
 node server.js
 ```
 
-
-### **Terminal 3 - Frontend**
+#### **Terminal 3 - Frontend**
 
 ```bash
 cd "ruta/al/proyecto/project/frontend"
 npm run dev
 ```
+
+5. Abre http://localhost:5173/
 ---
 
-### **Configurar Base de Datos (pgAdmin):**
-1. **pgAdmin:** http://localhost:8080
-   - Email: ``admin@example.com`` / Password: ``admin``
-2. **Crear servidor PostgreSQL:**
-   - Host: ``db`` / Port: ``5432`` / Database: ``ventacoches``
-   - Username: ``coches123`` / Password: ``coches123``
-3. **Ejecutar SQLs en orden:** 01→02→03→04→05 (carpeta ``db/sql/``)
+
 
 ### **URLs para probar:**
 - **Frontend:** http://localhost:5173/coches
@@ -118,7 +122,7 @@ project/
 
 Crea un archivo `.env` si lo necesitas para tu backend:
 
-\`\`\`
+```
 PORT=3000
 DB_HOST=db
 DB_PORT=5432
@@ -126,7 +130,7 @@ DB_USER=coches123
 DB_PASS=coches123
 DB_NAME=ventacoches
 JWT_SECRET=clave_super_segura
-\`\`\`
+```
 
 ---
 
