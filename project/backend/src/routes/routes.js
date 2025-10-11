@@ -101,7 +101,7 @@ router.get("/test", async (_req, res, next) => {
 /**
  * GET tots els cotxes
  */
-router.get("/coches", async (req, res, next) => {
+router.get("/vehiculos", async (req, res, next) => {
   try {
     const { 
       page = 1, 
@@ -174,7 +174,7 @@ router.get("/coches", async (req, res, next) => {
 /**
  * GET un cotxe per id
  */
-router.get("/coches/:id", async (req, res, next) => {
+router.get("/vehiculos/:id", async (req, res, next) => {
   try {
     const { id } = req.params;
     const { rows } = await pool.query(`
@@ -207,7 +207,7 @@ router.get("/coches/:id", async (req, res, next) => {
 /**
  * POST crear nou cotxe
  */
-router.post("/coches", async (req, res, next) => {
+router.post("/vehiculos", async (req, res, next) => {
   try {
     const {
       fecha, cliente, fabricante_id, modelo_id, version,
@@ -239,7 +239,7 @@ router.post("/coches", async (req, res, next) => {
 /**
  * DELETE eliminar cotxe per id
  */
-router.delete("/coches/:id", async (req, res, next) => {
+router.delete("/vehiculos/:id", async (req, res, next) => {
   try {
     const { id } = req.params;
     const { rowCount } = await pool.query("DELETE FROM ventacoches.coches WHERE id=$1", [id]);
@@ -260,7 +260,7 @@ router.delete("/coches/:id", async (req, res, next) => {
 /**
  * Filtrar cotxes per fabricant
  */
-router.get("/coches/fabricante/:fabricante_id", async (req, res, next) => {
+router.get("/vehiculos/fabricante/:fabricante_id", async (req, res, next) => {
   try {
     const { fabricante_id } = req.params;
     const { rows } = await pool.query(`
@@ -280,7 +280,7 @@ router.get("/coches/fabricante/:fabricante_id", async (req, res, next) => {
 /**
  * Filtrar cotxes per model
  */
-router.get("/coches/modelo/:modelo_id", async (req, res, next) => {
+router.get("/vehiculos/modelo/:modelo_id", async (req, res, next) => {
   try {
     const { modelo_id } = req.params;
     const { rows } = await pool.query(`
@@ -300,7 +300,7 @@ router.get("/coches/modelo/:modelo_id", async (req, res, next) => {
 /**
  * Filtrar cotxes per combustible
  */
-router.get("/coches/fuel/:fuel_id", async (req, res, next) => {
+router.get("/vehiculos/fuel/:fuel_id", async (req, res, next) => {
   try {
     const { fuel_id } = req.params;
     const { rows } = await pool.query(`
@@ -321,7 +321,7 @@ router.get("/coches/fuel/:fuel_id", async (req, res, next) => {
 /**
  * Filtrar cotxes per província
  */
-router.get("/coches/provincia/:provincia_id", async (req, res, next) => {
+router.get("/vehiculos/provincia/:provincia_id", async (req, res, next) => {
   try {
     const { provincia_id } = req.params;
     const { rows } = await pool.query(`
@@ -342,7 +342,7 @@ router.get("/coches/provincia/:provincia_id", async (req, res, next) => {
 /**
  * Filtrar cotxes per rang de preus
  */
-router.get("/coches/precio/:min/:max", async (req, res, next) => {
+router.get("/vehiculos/precio/:min/:max", async (req, res, next) => {
   try {
     const { min, max } = req.params;
     const { rows } = await pool.query(`
