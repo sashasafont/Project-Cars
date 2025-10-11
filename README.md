@@ -1,4 +1,3 @@
-cat > README.md <<EOL
 # 🚗 Project-Cars
 
 Proyecto full-stack para la gestión y visualización de coches.  
@@ -17,73 +16,91 @@ Desarrollado en **Windows** usando **Docker Desktop**, **Node.js** y **React**.
 ## ⚙️ Instalación
 
 1. Clona el repositorio:
-\`\`\`bash
+```bash
 git clone <URL-del-repo>
-cd Project-Cars/Project-Cars/project
-\`\`\`
+cd Project-Cars/project
 
-2. (Opcional) Instala dependencias para desarrollo local:
+2. Instala dependencias para desarrollo local:
+ # /backend
 \`\`\`bash
-cd web
-npm install
-cd ../backend
+cd backend
 npm install
 \`\`\`
-
+ # /frontend
+cd ../frontend
+npm install
 ---
 
-## 🐳 Uso con Docker Desktop
+## Cómo ejecutar:
 
-1. Abre Docker Desktop y espera a que diga:
-🟢 *"Docker Desktop is running"*
+1. Abre Docker Desktop 
 
-2. Levanta los servicios (Postgres y pgAdmin):
+2. Abre tres consolas
+
+### **Terminal 1 - Base de Datos (Docker)**
+
 \`\`\`bash
-docker-compose up -d --build
+cd "ruta/al/proyecto/project"
+docker-compose up -d
 \`\`\`
 
-3. Verifica los contenedores activos:
+### **Terminal 2 - Backend**
+
 \`\`\`bash
-docker ps
+cd "ruta/al/proyecto/project/backend"
+npm install
+node server.js
 \`\`\`
 
-4. Ver logs:
-\`\`\`bash
-docker-compose logs -f
-\`\`\`
 
-5. Detener y borrar contenedores, redes y volúmenes:
+### **Terminal 3 - Frontend**
+
 \`\`\`bash
-docker-compose down -v
+cd "ruta/al/proyecto/project/frontend"
+npm run dev
 \`\`\`
+---
+
+### **Configurar Base de Datos (pgAdmin):**
+1. **pgAdmin:** http://localhost:8080
+   - Email: ``admin@example.com`` / Password: ``admin``
+2. **Crear servidor PostgreSQL:**
+   - Host: ``db`` / Port: ``5432`` / Database: ``ventacoches``
+   - Username: ``coches123`` / Password: ``coches123``
+3. **Ejecutar SQLs en orden:** 01→02→03→04→05 (carpeta ``db/sql/``)
+
+### **URLs para probar:**
+- **Frontend:** http://localhost:5173/coches
+- **Fabricantes:** http://localhost:5173/fabricantes  
+- **Modelos:** http://localhost:5173/modelos
+- **Estadísticas:** http://localhost:5173/coches/stats
 
 ---
 
 ## 🧱 Servicios del proyecto
 
 ### Base de datos (Postgres)
-- Contenedor: **contenedor_coches**  
-- Puerto: `5432:5432`  
-- Usuario: `coches123`  
-- Contraseña: `coches123`  
-- Base de datos: `ventacoches`  
-- Volúmenes: `pgdata`, `./init`, `./backups`
+- Contenedor: **contenedor__coches**  
+- Puerto: ``5432:5432``  
+- Usuario: ``coches123``  
+- Contraseña: ``coches123``  
+- Base de datos: ``ventacoches``  
+- Volúmenes: ``pgdata``, ``./init``, ``./backups``
 
 ### pgAdmin
-- Contenedor: **pgadmin_curso**  
-- Puerto: `8080:80`  
-- Usuario: `admin@example.com`  
-- Contraseña: `admin`  
-- Depende de: `db`
+- Contenedor: **pgadmin__curso**  
+- Puerto: ``8080:80``  
+- Usuario: ``admin@example.com``  
+- Contraseña: ``admin``  
+- Depende de: ``db``
 
----
 
 ## 🧱 Estructura del proyecto
 
 \`\`\`
 project/
 ├── backend/       # API / servidor Node.js
-├── web/           # Aplicación web (React)
+├── frontend/      # Aplicación web (React)
 ├── db/            # Scripts de base de datos
 ├── backups/       # Copias de seguridad
 ├── init/          # Scripts iniciales de DB
@@ -110,39 +127,3 @@ JWT_SECRET=clave_super_segura
 
 ---
 
-## 🧪 Ejecutar tests
-
-Backend:
-\`\`\`bash
-cd backend
-npm test
-\`\`\`
-
-Frontend:
-\`\`\`bash
-cd ../web
-npm test
-\`\`\`
-
----
-
-## 👩‍💻 Contribuir
-
-1. Haz fork del proyecto.
-2. Crea una rama:
-\`\`\`bash
-git checkout -b feature/nueva-funcionalidad
-\`\`\`
-3. Realiza cambios y haz commit:
-\`\`\`bash
-git commit -m "Descripción de los cambios"
-\`\`\`
-4. Envía un Pull Request.
-
----
-
-## 📄 Licencia
-
-MIT
-
----
